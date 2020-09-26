@@ -16,7 +16,7 @@
                 <span class="text-success" v-if="!todoComp.checked"><i class="icon icon-check"></i></span>
                 <span class="text-error" v-else><i class="icon icon-cross"></i></span>
             </button>
-            <button class="btn btn-link mx-1"><i class="icon icon-edit"></i></button>
+            <button class="btn btn-link mx-1" @click="$emit('update', todoComp)"><i class="icon icon-edit"></i></button>
             <button class="btn btn-link mx-1" @click="$emit('remove', todoComp)"><span class="text-error"><i class="icon icon-delete"></i></span></button>
           </div>
           

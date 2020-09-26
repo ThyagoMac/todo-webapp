@@ -11,7 +11,7 @@
     </div>
       <hr>
       <div class="todo-list">
-        <Todo v-for="todo in todos" :key="todo.id" :todoComp="todo" @toggle="toggleTodo(todo)" @remove="removeTodo"/>
+        <Todo v-for="todo in todos" :key="todo.id" :todoComp="todo" @toggle="toggleTodo(todo)" @remove="removeTodo" @update="updateTodo"/>
       </div>
     
   </div>
@@ -41,9 +41,13 @@ export default {
       
     },
     addTodo(todo){
-      todo.id = Date.now();
-      this.todos.push(todo);
-      this.todo = {checked: false};
+      if(todo.id){
+        this.todo = {checked: false};
+      } else {
+        todo.id = Date.now();
+        this.todos.push(todo);
+        this.todo = {checked: false};
+      }
     },
     removeTodo(todo){
       const index = this.todos.findIndex(todos => todos.id === todo.id);
@@ -53,6 +57,11 @@ export default {
 
       }
     },
+    updateTodo(todo){
+      //const index = this.todos.findIndex(todos => todos.id === todo.id);
+      this.todo = todo;
+
+    }
   },
 }
 </script>
