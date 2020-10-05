@@ -5,7 +5,7 @@
         <form @submit.prevent="addTodo(todo)">
             <div class="input-group">
             <input type="text" class="form-input" placeholder="New Todo" v-model="todo.description">
-            <button class="btn btn-primary input-group-btn">Add</button>
+            <button class="btn btn-primary input-group-btn" :class="{loading}">Add</button>
             </div>
         </form>
         </div>
@@ -18,44 +18,49 @@
 
 <script>
 
-import Todo from '@/components/todo'
+import Todo from '@/components/todo';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'App',
   components: { Todo },
   data() {
     return {
-      todos: [],
-      todo: { checked: false}
+      todo: { checked: false },
+      
     }
   },
-  methods: {
-    toggleTodo(todo){
-      const index = this.todos.findIndex(todos => todos.id === todo.id);
-      if (index > -1){
-        const checked = !this.todos[index].checked;
-        this.$set(this.todos, index, {...this.todos[index], checked});
-        //this.todos[index].checked = checked;
-      }
-      
+  computed: {
+    ...mapState(['todos', 'loading']),
+    /* todos(){
+      return this.$store.state.todos;
     },
-    addTodo(todo){
+    loading() {
+      return this.$store.state.loading;
+    } */
+  },
+  methods: {
+    ...mapActions(['addTodo', 'toggleTodo', 'removeTodo']),
+
+    /* toggleTodo(todo){
+      this.$store.dispatch('toggleTodo', todo);
+      
+    }, */
+    async addTodo(todo){
+
       if(todo.id){
         this.todo = {checked: false};
-      } else {
-        todo.id = Date.now();
-        this.todos.push(todo);
-        this.todo = {checked: false};
+      }else {
+        
+        await this.$store.dispatch('addTodo', todo);
+        this.todo = {checked: false}
+        
       }
-    },
-    removeTodo(todo){
-      const index = this.todos.findIndex(todos => todos.id === todo.id);
-      if(index > -1){
-        this.$delete(this.todos, index);
-        //this.todos.splice(index,1);
 
-      }
     },
+    /* removeTodo(todo){
+      this.$store.dispatch('removeTodo', todo);
+    }, */
     updateTodo(todo){
       //const index = this.todos.findIndex(todos => todos.id === todo.id);
       this.todo = todo;
