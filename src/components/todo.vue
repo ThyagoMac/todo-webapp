@@ -1,26 +1,26 @@
 <template>
-    <div class="title flex-centered" :class="{checked: todoComp.checked}">
+    <div class="tile flex-centered" :class="{checked: todoComp.checked}">
           
-          <div class="title-icon">
-            <i class="icon" :class="todoComp.checked ? 'icon-check' : 'icon-time'"></i>
-          </div>
-          <div class="title-concent mx-2">
-            <div class="title-subtitle">{{ todoComp.description }}</div>
-          </div>
-          <div class="title-action">
-            <button class="btn btn-link mx-1" @click="$emit('toggle', todoComp)">
-                <!-- 
-                <span class="text-success" v-show="!todoComp.checked"><i class="icon icon-check"></i></span>
-                <span class="text-error" v-show="todoComp.checked"><i class="icon icon-cross"></i></span> 
-                -->
-                <span class="text-success" v-if="!todoComp.checked"><i class="icon icon-check"></i></span>
-                <span class="text-error" v-else><i class="icon icon-cross"></i></span>
-            </button>
-            <button class="btn btn-link mx-1" @click="$emit('update', todoComp)"><i class="icon icon-edit"></i></button>
-            <button class="btn btn-link mx-1" @click="$emit('remove', todoComp)"><span class="text-error"><i class="icon icon-delete"></i></span></button>
-          </div>
-          
-        </div>
+      <div class="title-icon">
+        <i class="icon" :class="todoComp.checked ? 'icon-check' : 'icon-time'"></i>
+      </div>
+      <div class="title-concent mx-2">
+        <div class="title-subtitle">{{ todoComp.description }}</div>
+      </div>
+      <div class="title-action">
+        <button class="btn btn-link mx-1" @click="$emit('toggle', todoComp)">
+            <!-- 
+            <span class="text-success" v-show="!todoComp.checked"><i class="icon icon-check"></i></span>
+            <span class="text-error" v-show="todoComp.checked"><i class="icon icon-cross"></i></span> 
+            -->
+            <span class="text-success" v-if="!todoComp.checked"><i class="icon icon-check"></i></span>
+            <span class="text-error" v-else><i class="icon icon-cross"></i></span>
+        </button>
+        <button class="btn btn-link mx-1" @click="$emit('update', todoComp)"><i class="icon icon-edit"></i></button>
+        <button class="btn btn-link mx-1" @click="$emit('remove', todoComp)"><span class="text-error"><i class="icon icon-delete"></i></span></button>
+      </div>
+        
+    </div>
 </template>
 
 <script>
@@ -38,5 +38,10 @@ export default {
 .checked{
     text-decoration: line-through;
     color: lightgray;
+}
+.tile {
+  margin-top: 1rem;
+  padding: 1rem;
+  box-shadow: 2px 0.25rem 1rem rgba(48, 55, 66,0.15);
 }
 </style>

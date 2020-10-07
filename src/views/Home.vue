@@ -2,7 +2,7 @@
     <div>
         <div class="container grid-xs py-2">
         <h4 class="title">Todo Web App</h4>
-        <form @submit.prevent="addTodo(todo)">
+        <form @submit.prevent="addTodoFunc(todo)">
             <div class="input-group">
             <input type="text" class="form-input" placeholder="New Todo" v-model="todo.description">
             <button class="btn btn-primary input-group-btn" :class="{loading}">Add</button>
@@ -10,8 +10,8 @@
         </form>
         </div>
         <hr>
-        <div class="todo-list">
-        <Todo v-for="todo in todos" :key="todo.id" :todoComp="todo" @toggle="toggleTodo(todo)" @remove="removeTodo" @update="updateTodo"/>
+        <div class="todo-list container grid-xs py-2">
+        <Todo class="container" v-for="todo in todos" :key="todo.id" :todoComp="todo" @toggle="toggleTodo(todo)" @remove="removeTodo" @update="updateTodo"/>
         </div>
     </div>
 </template>
@@ -46,12 +46,13 @@ export default {
       this.$store.dispatch('toggleTodo', todo);
       
     }, */
-    async addTodo(todo){
+    async addTodoFunc(todo){
 
       if(todo.id){
         this.todo = {checked: false};
       }else {
         
+        //await this.addTodo(todo);
         await this.$store.dispatch('addTodo', todo);
         this.todo = {checked: false}
         
